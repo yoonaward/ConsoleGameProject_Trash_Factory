@@ -21,7 +21,7 @@ private:
 	virtual void OnCollision(const std::shared_ptr<Craft::Actor>& other) override;
 
 	// 이동 처리 함수.
-	void Move(float direction, float deltaTime);
+	void Move(float xDirection, float yDirection, float deltaTime);
 
 	// 쓰레기 수집 키 함수.
 	void PickUpGarbage();
@@ -31,8 +31,14 @@ private:
 	float xPosition = 0.0f;
 	float yPosition = 0.0f;
 
+	// 돈.
+	int money = 0;
+
+	// 쓰레기 도감.
+	
+
 	// 이동 속도 변수.
-	float moveSpeed = 50.0f;
+	float moveSpeed = 10.0f;
 
 };
 

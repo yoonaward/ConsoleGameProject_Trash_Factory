@@ -8,7 +8,7 @@ Player::Player()
 	:Actor("@", Vector2::Zero, Color::Green)
 {
 	// 생성 위치 설정.
-	int x = Engine::Get().GetWidth() / 2;
+	int x = Engine::Get().GetWidth() / 2 - (width / 2);
 	int y = Engine::Get().GetHeight() / 2;
 	SetPosition(Vector2(x, y));
 
@@ -34,35 +34,34 @@ void Player::Tick(float deltaTime)
 
 
 	// 움직임 처리.
+	
+	float xDirection = 0.0f;
+	float yDirection = 0.0f;
+
 	// 오른쪽.
 	if (Input::Get().GetKey(VK_RIGHT))
 	{
 		// 이동하려는 위치 값 만들기.
-		Vector2 newPosition = GetPosition();
-		newPosition.x += 1;
-		SetPosition(newPosition);
+		xDirection = 1.0f;
 	}
 
 	if (Input::Get().GetKey(VK_LEFT))
 	{
-		Vector2 newPosition = GetPosition();
-		newPosition.x -= 1;
-		SetPosition(newPosition);
+		xDirection = -1.0f;
 	}
 
 	if (Input::Get().GetKey(VK_UP))
 	{
-		Vector2 newPosition = GetPosition();
-		newPosition.y -= 1;
-		SetPosition(newPosition);
+		yDirection = -1.0f;
 	}
 
 	if (Input::Get().GetKey(VK_DOWN))
 	{
-		Vector2 newPosition = GetPosition();
-		newPosition.y += 1;
-		SetPosition(newPosition);
+		yDirection = 1.0f;
 	}
+
+	Move(xDirection, yDirection, deltaTime);
+
 }
 
 void Player::OnCollision(const std::shared_ptr<Craft::Actor>& other)
@@ -70,8 +69,41 @@ void Player::OnCollision(const std::shared_ptr<Craft::Actor>& other)
 
 }
 
-void Player::Move(float direction, float deltaTime)
+void Player::Move(float xDirection, float yDirection, float deltaTime)
 {
+	xPosition += xDirection * moveSpeed * deltaTime;
+	yPosition += yDirection * moveSpeed * deltaTime;
+
+	// 화면 왼쪽 막힘 처리.
+	if (xPosition < 0)
+	{
+		xPosition = 0.0f;
+	}
+
+	// 화면 오른쪽 막힘 처리.
+	if (xPosition + width >= Engine::Get().GetWidth())
+	{
+		xPosition = static_cast<float>(Engine::Get().GetWidth() - width);
+	}
+
+	// 화면 위쪽 막힘 처리.
+	if (yPosition < 0)
+	{
+		yPosition = 0.0f;
+	}
+
+	// 화면 아래쪽 막힘 처리.
+	if (yPosition >= Engine::Get().GetHeight())
+	{
+		yPosition =static_cast<float>(Engine::Get().GetHeight() - 1);
+	}
+
+	// 위치 업데이트
+	Vector2 newPosition = GetPosition();
+	// float 값을 int로 형변환할 때 소숫점 값은 버림 처리된다는 점 주의.
+	newPosition.x = static_cast<int>(xPosition);
+	newPosition.y = static_cast<int>(yPosition);
+	SetPosition(newPosition);
 
 }
 
