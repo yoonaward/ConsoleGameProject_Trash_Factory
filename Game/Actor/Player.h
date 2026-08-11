@@ -38,7 +38,8 @@ private:
 	
 
 	// 이동 속도 변수.
-	float moveSpeed = 10.0f;
+	float xMoveSpeed = 10.0f;
+	float yMoveSpeed = 5.82f;
 
 };
 

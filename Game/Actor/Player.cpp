@@ -71,8 +71,8 @@ void Player::OnCollision(const std::shared_ptr<Craft::Actor>& other)
 
 void Player::Move(float xDirection, float yDirection, float deltaTime)
 {
-	xPosition += xDirection * moveSpeed * deltaTime;
-	yPosition += yDirection * moveSpeed * deltaTime;
+	xPosition += xDirection * xMoveSpeed * deltaTime;
+	yPosition += yDirection * yMoveSpeed * deltaTime;
 
 	// 화면 왼쪽 막힘 처리.
 	if (xPosition < 0)
