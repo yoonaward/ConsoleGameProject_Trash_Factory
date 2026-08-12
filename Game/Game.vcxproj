@@ -98,17 +98,22 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\Bench.cpp" />
     <ClCompile Include="Actor\Cat.cpp" />
     <ClCompile Include="Actor\Dog.cpp" />
     <ClCompile Include="Actor\Garbage.cpp" />
+    <ClCompile Include="Actor\Ground.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
     <ClCompile Include="Actor\Rat.cpp" />
+    <ClCompile Include="Actor\Tree.cpp" />
     <ClCompile Include="Actor\Wall.cpp" />
+    <ClCompile Include="Actor\Water.cpp" />
     <ClCompile Include="Level\SmallParkLevel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="System\GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor\Bench.h" />
     <ClInclude Include="Actor\Box.h" />
     <ClInclude Include="Actor\Cat.h" />
     <ClInclude Include="Actor\Dog.h" />
@@ -117,7 +122,9 @@
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\Rat.h" />
     <ClInclude Include="Actor\Target.h" />
+    <ClInclude Include="Actor\Tree.h" />
     <ClInclude Include="Actor\Wall.h" />
+    <ClInclude Include="Actor\Water.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Level\GameLevel.h" />
     <ClInclude Include="Level\MenuLevel.h" />

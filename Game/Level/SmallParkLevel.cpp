@@ -1,7 +1,10 @@
 ﻿#include "SmallParkLevel.h"
 #include <Actor/Player.h>
 #include <Actor/Wall.h>
-
+#include <Actor/Tree.h>
+#include <Actor/Ground.h>
+#include <Actor/Water.h>
+#include <Actor/Bench.h>
 
 #include <cassert>
 
@@ -108,11 +111,23 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 
 			case '@':
 				SpawnActor<Player>(position);
-
 				break;
 
-			
+			case 'I':
+				SpawnActor<Tree>(position);
+				break;
 
+			case '.':
+				SpawnActor<Ground>(position);
+				break;
+
+			case '~':
+				SpawnActor<Water>(position);
+				break;
+			
+			case '=':
+				SpawnActor<Bench>(position);
+				break;
 
 			}
 
