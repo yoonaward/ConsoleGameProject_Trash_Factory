@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Level/Level.h>
+#include <string>
 
 
 
@@ -9,6 +10,8 @@ class SmallParkLevel : public Craft::Level
 
 	TYPE_DECLARATIONS(SmallParkLevel, Level)
 
+
+	bool CheckGameClear();
 public:
 	SmallParkLevel();
 	virtual~SmallParkLevel();
@@ -20,17 +23,9 @@ public:
 	virtual void Draw() override;
 
 private:
-	const char* map[8] =
-	{
-		"####################################",
-		"#                                  #",
-		"#                                  #",
-		"#                                  #",
-		"#                                  #",
-		"#                                  #",
-		"#                                  #",
-		"####################################",
+	// 클리어 조건 여부.
+	bool isGameClear = false;
 
-	};
+
 };
 
