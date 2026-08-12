@@ -1,27 +1,21 @@
-#pragma once
+﻿#pragma once
 
-#include <Level/Level.h>
-#include <Math/Vector2.h>
-
-
-#include <string>
-
-
-
-
-class GameState : public Craft :: Level
+class GameState 
 {
-	TYPE_DECLARATIONS(GameState, Level)
+private:
+	// 클리어 확인
+	bool CheckGameClear();
 
 private:
-	// 맵 초기화 함수.
-	virtual void OnInitialized() override;
+	// 클리어 조건 여부.
+	bool isGameClear = false;
 
-	// 그리기.
-	virtual void Draw() override;
+	// 돈.
+	int money = 0;
 
-	// 맵 로드.
-	void LoadMap(const std::string& filename);
+	// 쓰레기 도감.
+
+	// 쓰레기 카운트.
 
 };
 

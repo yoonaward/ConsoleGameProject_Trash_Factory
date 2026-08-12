@@ -10,7 +10,7 @@ class Player : public Craft::Actor
 
 public:
 	// 생성자.
-	Player();
+	Player(const Craft::Vector2& position);
 
 private:
 	
@@ -30,11 +30,6 @@ private:
 	// 이동 처리에 필요한 변수.
 	float xPosition = 0.0f;
 	float yPosition = 0.0f;
-
-	// 돈.
-	int money = 0;
-
-	// 쓰레기 도감.
 	
 
 	// 이동 속도 변수.

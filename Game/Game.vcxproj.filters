@@ -44,12 +44,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Level\TestLevel.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor\TestActor.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Level\GameLevel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -90,6 +84,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="System\GameState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\TestActor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

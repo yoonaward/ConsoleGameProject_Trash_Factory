@@ -4,7 +4,7 @@
 
 using namespace Craft;
 
-Player::Player()
+Player::Player(const Vector2& position)
 	:Actor("@", Vector2::Zero, Color::Green)
 {
 	// 생성 위치 설정.

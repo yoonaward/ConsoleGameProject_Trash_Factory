@@ -117,13 +117,11 @@
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\Rat.h" />
     <ClInclude Include="Actor\Target.h" />
-    <ClInclude Include="Actor\TestActor.h" />
     <ClInclude Include="Actor\Wall.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Level\GameLevel.h" />
     <ClInclude Include="Level\MenuLevel.h" />
     <ClInclude Include="Level\SmallParkLevel.h" />
-    <ClInclude Include="Level\TestLevel.h" />
     <ClInclude Include="System\GameState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
