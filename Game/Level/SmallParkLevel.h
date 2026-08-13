@@ -19,14 +19,18 @@ public:
 
 public:
 
-	// 맵 초기화 함수.
+	// 맵 초기화 함수
 	virtual void OnInitialized() override;
 
+	// LeafEffect 생성 함수
+	void ShowLeafEffect();
+
 private:
-	// 맵 로드.
+	// 맵 로드
 	void LoadMap(const std::string& filename);
 
 private:
-	int garbageCount;
+	// LeafEffect 중복을 막기 위한 상태
+	bool onLeafEffect = false;
 };
 

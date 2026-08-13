@@ -6,6 +6,8 @@
 #include <Actor/Tree.h>
 #include <Actor/TrashCan.h>
 #include <Actor/Water.h>
+#include <Actor/LeafEffect.h>
+#include <Level/SmallParkLevel.h>
 
 
 using namespace Craft;
@@ -122,13 +124,15 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 	//  나무 충돌 처리
 	if (other->IsTypeOf<Tree>())
 	{
-		SetPosition(GetPreviousPosition());
+		auto parkLevel =
+			std::dynamic_pointer_cast<SmallParkLevel>(GetOwner());
 
-		xPosition =
-			static_cast<float>(GetPreviousPosition().x);
+		if (parkLevel)
+		{
+			parkLevel->ShowLeafEffect();
+		}
 
-		yPosition =
-			static_cast<float>(GetPreviousPosition().y);
+		return;
 	}
 		//  물 충돌 처리
 		if (other->IsTypeOf<Water>())

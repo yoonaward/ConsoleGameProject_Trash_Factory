@@ -29,6 +29,8 @@ public:
 	void revertMoveSpeed();
 
 
+
+
 private:
 	
 	// 이벤트 함수 오버라이드.

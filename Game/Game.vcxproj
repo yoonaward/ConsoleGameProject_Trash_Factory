@@ -100,6 +100,7 @@
   <ItemGroup>
     <ClCompile Include="Actor\Garbage.cpp" />
     <ClCompile Include="Actor\Ground.cpp" />
+    <ClCompile Include="Actor\LeafEffect.cpp" />
     <ClCompile Include="Actor\Obstacle.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
     <ClCompile Include="Actor\TrashCan.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="Actor\Box.h" />
     <ClInclude Include="Actor\Garbage.h" />
     <ClInclude Include="Actor\Ground.h" />
+    <ClInclude Include="Actor\LeafEffect.h" />
     <ClInclude Include="Actor\Obstacle.h" />
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\Target.h" />

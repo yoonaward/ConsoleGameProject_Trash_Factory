@@ -6,6 +6,7 @@
 #include <Actor/Garbage.h>
 #include <Actor/TrashCan.h>
 #include <Actor/Obstacle.h>
+#include <Actor/LeafEffect.h>
 
 
 #include <cassert>
@@ -31,6 +32,21 @@ void SmallParkLevel::OnInitialized()
 	// 플레이어 임시 스폰
 	SpawnActor<Player>();
 	
+}
+
+void SmallParkLevel::ShowLeafEffect()
+{
+	// 이미 실행중이면 반환
+	if (onLeafEffect)
+	{
+		return;
+	}
+
+	// 상태값 변경
+	onLeafEffect = true;
+
+	// 효과 생성
+	SpawnActor<LeafEffect>();
 }
 
 void SmallParkLevel::LoadMap(const std::string& filename)
