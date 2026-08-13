@@ -25,6 +25,9 @@ public:
 	// 플레이어의 속도조절 Getter
 	void ChangeMoveSpeed();
 
+	// 속도를 다시 되돌리는 
+	void revertMoveSpeed();
+
 
 private:
 	

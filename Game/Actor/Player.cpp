@@ -46,8 +46,14 @@ Player::Player()
 
 void Player::ChangeMoveSpeed()
 {
-	xMoveSpeed = 0.1f;
-	yMoveSpeed = 0.1f;
+	xMoveSpeed = 0.3f;
+	yMoveSpeed = 0.3f;
+}
+
+void Player::revertMoveSpeed()
+{
+	xMoveSpeed = 10.0f;
+	yMoveSpeed = 5.82f;
 }
 
 
@@ -128,6 +134,12 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 		if (other->IsTypeOf<Water>())
 		{
 			ChangeMoveSpeed();
+		}
+
+		//  물 나왔을 때 처리
+		if (!other->IsTypeOf<Water>())
+		{
+			revertMoveSpeed();
 		}
 
 		// 쓰레기 줍는 과정 처리 근데 스페이스를 누르면 처리 되게 해야하는데
