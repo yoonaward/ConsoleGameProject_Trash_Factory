@@ -2,9 +2,8 @@
 #include <Engine/Engine.h>
 #include <Input/Input.h>
 #include <Actor/Garbage.h>
-#include <Actor/Wall.h>
+#include <Actor/Obstacle.h>
 #include <Actor/Tree.h>
-#include <Actor/Bench.h>
 #include <Actor/TrashCan.h>
 
 
@@ -62,7 +61,6 @@ void Player::Tick(float deltaTime)
 
 
 	// 움직임 처리.
-	
 	float xDirection = 0.0f;
 	float yDirection = 0.0f;
 
@@ -91,16 +89,13 @@ void Player::Tick(float deltaTime)
 
 	Move(xDirection, yDirection, deltaTime);
 
-
-
-
 }
 
 // 충돌 이벤트
 void Player::OnCollision(const std::shared_ptr<Actor>& other)
 {
-	//  벽 충돌처리
-	if (other->IsTypeOf<Wall>())
+	//  Wall, Bench 충돌 처리
+	if (other->IsTypeOf<Obstacle>())
 	{
 		SetPosition(GetPreviousPosition());
 
@@ -113,18 +108,6 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 
 	//  나무 충돌 처리
 	if (other->IsTypeOf<Tree>())
-	{
-		SetPosition(GetPreviousPosition());
-
-		xPosition =
-			static_cast<float>(GetPreviousPosition().x);
-
-		yPosition =
-			static_cast<float>(GetPreviousPosition().y);
-	}
-
-	//  밴치 충돌 처리
-	if (other->IsTypeOf<Bench>())
 	{
 		SetPosition(GetPreviousPosition());
 

@@ -1,12 +1,12 @@
 ﻿#include "SmallParkLevel.h"
 #include <Actor/Player.h>
-#include <Actor/Wall.h>
 #include <Actor/Tree.h>
 #include <Actor/Ground.h>
 #include <Actor/Water.h>
-#include <Actor/Bench.h>
 #include <Actor/Garbage.h>
 #include <Actor/TrashCan.h>
+#include <Actor/Obstacle.h>
+
 
 #include <cassert>
 
@@ -112,7 +112,7 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 			switch (currentChar)
 			{
 			case '#':
-				SpawnActor<Wall>(position);
+				SpawnActor<Obstacle>(Obstacle::ObstacleType::Wall, position);
 				break;
 
 			case 'I':
@@ -128,7 +128,7 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 				break;
 			
 			case '=':
-				SpawnActor<Bench>(position);
+				SpawnActor<Obstacle>(Obstacle::ObstacleType::Bench, position);
 				break;
 
 			case 'G':
