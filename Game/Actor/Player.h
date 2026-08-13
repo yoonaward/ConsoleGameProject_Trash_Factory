@@ -20,7 +20,10 @@ class Player : public Craft::Actor
 
 public:
 	// 생성자.
-	Player(const Craft::Vector2& position);
+	Player();
+
+	// 플레이어의 속도조절 Getter
+	void ChangeMoveSpeed();
 
 
 private:
@@ -44,7 +47,7 @@ private:
 	// 이동 속도 변수.
 	float xMoveSpeed = 10.0f;
 	float yMoveSpeed = 5.82f;
-
+	
 private:
 	// 옮기는 거 false
 	bool isGrab = false;

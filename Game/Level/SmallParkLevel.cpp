@@ -29,7 +29,7 @@ void SmallParkLevel::OnInitialized()
     LoadMap("SmallParkMap.txt");
 
 	// 플레이어 임시 스폰
-	SpawnActor<Player>(Vector2(10,5));
+	SpawnActor<Player>();
 	
 }
 

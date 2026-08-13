@@ -5,6 +5,7 @@
 #include <Actor/Obstacle.h>
 #include <Actor/Tree.h>
 #include <Actor/TrashCan.h>
+#include <Actor/Water.h>
 
 
 using namespace Craft;
@@ -24,7 +25,7 @@ using namespace Craft;
 쓰레기를 쓰레기통에 넣으면 카운트가 올라간다 ++ garbageCount
 */
 
-Player::Player(const Vector2& position)
+Player::Player()
 	:Actor("@", Vector2::Zero, Color::Green)
 {
 	// 생성 위치 설정.
@@ -41,6 +42,12 @@ Player::Player(const Vector2& position)
 	sortingOrder = 10;
 
 
+}
+
+void Player::ChangeMoveSpeed()
+{
+	xMoveSpeed = 0.1f;
+	yMoveSpeed = 0.1f;
 }
 
 
@@ -117,55 +124,61 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 		yPosition =
 			static_cast<float>(GetPreviousPosition().y);
 	}
-
-	// 쓰레기 줍는 과정 처리 근데 스페이스를 누르면 처리 되게 해야하는데
-	if (!Input::Get().GetKey(VK_SPACE))
-	{
-		return;
-	}
-		
-	if (other->IsTypeOf<Garbage>())
-	{
-		// 이미 잡고 있다면 안되게 처리
-		if (isGrab)
+		//  물 충돌 처리
+		if (other->IsTypeOf<Water>())
 		{
-			return;
+			ChangeMoveSpeed();
 		}
-		
-		// 잡고 있는 상태 변환
-		isGrab = true;
 
-		// 잡고 있는 이미지 추가
-		ChangeImage("&");
-
-		// 삭제 요청
-		other->Destroy();
-
-		return;
-	}
-
-	// 쓰레기통에 버리기
-	if (other->IsTypeOf<TrashCan>())
-	{
-		// 들고 있지 않으면 버리지 않음
-		if (!isGrab)
+		// 쓰레기 줍는 과정 처리 근데 스페이스를 누르면 처리 되게 해야하는데
+		if (!Input::Get().GetKey(VK_SPACE))
 		{
 			return;
 		}
 
-		// 놓는 상태로 변환.
-		isGrab = false;
+		if (other->IsTypeOf<Garbage>())
+		{
+			// 이미 잡고 있다면 안되게 처리
+			if (isGrab)
+			{
+				return;
+			}
 
-		// 잡고 있는 이미지 변경
-		ChangeImage("@");
+			// 잡고 있는 상태 변환
+			isGrab = true;
+
+			// 잡고 있는 이미지 추가
+			ChangeImage("&");
+
+			// 삭제 요청
+			other->Destroy();
+
+			return;
+		}
+
+		// 쓰레기통에 버리기
+		if (other->IsTypeOf<TrashCan>())
+		{
+			// 들고 있지 않으면 버리지 않음
+			if (!isGrab)
+			{
+				return;
+			}
+
+			// 놓는 상태로 변환.
+			isGrab = false;
+
+			// 잡고 있는 이미지 변경
+			ChangeImage("@");
 
 
-		// Todo: 스코어 증가 처리.
-		
-		return;
-		
+			// Todo: 스코어 증가 처리.
+
+			return;
+
+		}
 	}
-}
+
 void Player::Move(float xDirection, float yDirection, float deltaTime)
 {
 	xPosition += xDirection * xMoveSpeed * deltaTime;
