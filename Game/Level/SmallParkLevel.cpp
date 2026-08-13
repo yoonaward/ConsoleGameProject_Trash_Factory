@@ -30,8 +30,6 @@ void SmallParkLevel::OnInitialized()
 
 	// 플레이어 임시 스폰
 	SpawnActor<Player>(Vector2(10,5));
-
-	SpawnActor<Garbage>(Vector2(10, 10));
 	
 }
 
@@ -131,6 +129,10 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 			
 			case '=':
 				SpawnActor<Bench>(position);
+				break;
+
+			case 'G':
+				SpawnActor<Garbage>(position);
 				break;
 
 			case 'U':

@@ -142,40 +142,44 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 	}
 		
 	if (other->IsTypeOf<Garbage>())
-		{
-			// 잡고 있는 상태 변환
-		isGrab = true;
-
-			// 이미 잡고 있다면 안되게 처리
-		if (!isGrab)
-		{
-			return;
-		}
-
-		// 잡고 있는 이미지 추가
-			ChangeImage("&");
-
-
-		// 삭제 요청
-		other->Destroy();
-		}
-
-	if (other->IsTypeOf<TrashCan>())
 	{
-		// 놓는 상태로 변환.
-		isGrab = false;
-
 		// 이미 잡고 있다면 안되게 처리
 		if (isGrab)
 		{
 			return;
 		}
+		
+		// 잡고 있는 상태 변환
+		isGrab = true;
+
+		// 잡고 있는 이미지 추가
+		ChangeImage("&");
+
+		// 삭제 요청
+		other->Destroy();
+
+		return;
+	}
+
+	// 쓰레기통에 버리기
+	if (other->IsTypeOf<TrashCan>())
+	{
+		// 들고 있지 않으면 버리지 않음
+		if (!isGrab)
+		{
+			return;
+		}
+
+		// 놓는 상태로 변환.
+		isGrab = false;
 
 		// 잡고 있는 이미지 변경
 		ChangeImage("@");
 
 
 		// Todo: 스코어 증가 처리.
+		
+		return;
 		
 	}
 }
