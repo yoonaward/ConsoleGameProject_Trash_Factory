@@ -102,6 +102,7 @@
     <ClCompile Include="Actor\Garbage.cpp" />
     <ClCompile Include="Actor\Ground.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
+    <ClCompile Include="Actor\TrashCan.cpp" />
     <ClCompile Include="Actor\Tree.cpp" />
     <ClCompile Include="Actor\Wall.cpp" />
     <ClCompile Include="Actor\Water.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="Actor\Ground.h" />
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\Target.h" />
+    <ClInclude Include="Actor\TrashCan.h" />
     <ClInclude Include="Actor\Tree.h" />
     <ClInclude Include="Actor\Wall.h" />
     <ClInclude Include="Actor\Water.h" />

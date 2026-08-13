@@ -5,6 +5,7 @@
 #include <Actor/Wall.h>
 #include <Actor/Tree.h>
 #include <Actor/Bench.h>
+#include <Actor/TrashCan.h>
 
 
 using namespace Craft;
@@ -16,6 +17,12 @@ using namespace Craft;
 3. 쓰레기를 집는 기능(스페이스 키)
 4. 장애물 충돌
 5. 물,돌뿌리 위에서 속도가 감소 처리
+쓰레기를 스페이스로 줍는 과정
+쓰레기 근처로 간다.
+쓰레기가 근처에 있는 지 확인한다. CheckGarbage()
+쓰레기를 스페이스바를 눌러 줍는다 VK_SPACE
+쓰레기를 삭제한다. Destory()
+쓰레기를 쓰레기통에 넣으면 카운트가 올라간다 ++ garbageCount
 */
 
 Player::Player(const Vector2& position)
@@ -36,6 +43,9 @@ Player::Player(const Vector2& position)
 
 
 }
+
+
+
 
 void Player::Tick(float deltaTime)
 {
@@ -126,22 +136,47 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 	}
 
 	// 쓰레기 줍는 과정 처리 근데 스페이스를 누르면 처리 되게 해야하는데
-	if (Input::Get().GetKey(VK_SPACE))
+	if (!Input::Get().GetKey(VK_SPACE))
 	{
-		if (other->IsTypeOf<Garbage>())
+		return;
+	}
+		
+	if (other->IsTypeOf<Garbage>())
 		{
 			// 잡고 있는 상태 변환
-			CanCarrying();
+		isGrab = true;
 
 			// 이미 잡고 있다면 안되게 처리
-			if (!isGrab)
-			{
-				return;
-			}
-
-			// 삭제 요철
-			other->Destroy();
+		if (!isGrab)
+		{
+			return;
 		}
+
+		// 잡고 있는 이미지 추가
+			ChangeImage("&");
+
+
+		// 삭제 요청
+		other->Destroy();
+		}
+
+	if (other->IsTypeOf<TrashCan>())
+	{
+		// 놓는 상태로 변환.
+		isGrab = false;
+
+		// 이미 잡고 있다면 안되게 처리
+		if (isGrab)
+		{
+			return;
+		}
+
+		// 잡고 있는 이미지 변경
+		ChangeImage("@");
+
+
+		// Todo: 스코어 증가 처리.
+		
 	}
 }
 void Player::Move(float xDirection, float yDirection, float deltaTime)
@@ -182,21 +217,4 @@ void Player::Move(float xDirection, float yDirection, float deltaTime)
 
 }
 
-void Player::CanCarrying()
-{
-	isGrab = true;
-}
-
-void Player::PickUpGarbage()
-{
-	// Todo: 쓰레기를 스페이스로 줍는 과정
-	// 쓰레기 근처로 간다.
-	// 쓰레기가 근처에 있는 지 확인한다. CheckGarbage()
-	// 쓰레기를 스페이스바를 눌러 줍는다 VK_SPACE
-	// 쓰레기를 삭제한다. Destory()
-	// 쓰레기를 쓰레기통에 넣으면 카운트가 올라간다 ++ garbageCount
-
-
-
-}
 

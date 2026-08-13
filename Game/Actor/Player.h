@@ -22,6 +22,7 @@ public:
 	// 생성자.
 	Player(const Craft::Vector2& position);
 
+
 private:
 	
 	// 이벤트 함수 오버라이드.
@@ -33,12 +34,6 @@ private:
 	// 이동 처리 함수.
 	void Move(float xDirection, float yDirection, float deltaTime);
 
-	// 옮길 수 있는지
-	void CanCarrying();
-
-	// 쓰레기 수집 키 함수.
-	// 스페이스를 누르면 수집 및 쓰레기 갯수 + , 도감 등록
-	void PickUpGarbage();
 
 private:
 	// 이동 처리에 필요한 변수.
@@ -51,6 +46,7 @@ private:
 	float yMoveSpeed = 5.82f;
 
 private:
+	// 옮기는 거 false
 	bool isGrab = false;
 
 };

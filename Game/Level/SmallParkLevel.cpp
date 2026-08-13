@@ -6,6 +6,7 @@
 #include <Actor/Water.h>
 #include <Actor/Bench.h>
 #include <Actor/Garbage.h>
+#include <Actor/TrashCan.h>
 
 #include <cassert>
 
@@ -131,6 +132,11 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 			case '=':
 				SpawnActor<Bench>(position);
 				break;
+
+			case 'U':
+				SpawnActor<TrashCan>(position);
+				break;
+
 
 			}
 

@@ -8,7 +8,7 @@ using namespace Craft;
 Garbage 클래스에 필요한 것
 1. Garbage 위치
 2. Garbage 문자
-3. Garbage 삭제
+3. 우선순위
 4. Garbage 랜덤 스폰( 할 수 있으면 )
 */
 
