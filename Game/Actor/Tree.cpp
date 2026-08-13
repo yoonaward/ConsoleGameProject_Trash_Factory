@@ -1,8 +1,13 @@
-#include "Tree.h"
+﻿#include "Tree.h"
 
 using namespace Craft;
 
-Tree::Tree(const Craft::Vector2& position)
+/* 나무 클래스에 필요한 것
+
+
+*/
+
+Tree::Tree(const Vector2& position)
 	:Actor("I", position, Color::Cyan)
 {
 

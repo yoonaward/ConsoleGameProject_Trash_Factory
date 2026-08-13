@@ -2,6 +2,11 @@
 
 class GameState 
 {
+public:
+	// 아이템 사기
+	void Buy();
+
+
 private:
 	// 클리어 확인
 	bool CheckGameClear();
@@ -14,8 +19,9 @@ private:
 	int money = 0;
 
 	// 쓰레기 도감.
+	
 
 	// 쓰레기 카운트.
-
+	int GarbageCount = 0;
 };
 

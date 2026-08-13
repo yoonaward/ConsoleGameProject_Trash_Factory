@@ -1,8 +1,22 @@
 ﻿#include "Player.h"
 #include <Engine/Engine.h>
 #include <Input/Input.h>
+#include <Actor/Garbage.h>
+#include <Actor/Wall.h>
+#include <Actor/Tree.h>
+#include <Actor/Bench.h>
+
 
 using namespace Craft;
+
+/* 
+플레이어 클래스에 필요한 것
+1. 이동 설정(위치 값)
+2. 문자 표시
+3. 쓰레기를 집는 기능(스페이스 키)
+4. 장애물 충돌
+5. 물,돌뿌리 위에서 속도가 감소 처리
+*/
 
 Player::Player(const Vector2& position)
 	:Actor("@", Vector2::Zero, Color::Green)
@@ -17,6 +31,10 @@ Player::Player(const Vector2& position)
 
 	// y 위치 저장.
 	yPosition = static_cast<float>(y);
+
+	sortingOrder = 10;
+
+
 }
 
 void Player::Tick(float deltaTime)
@@ -60,15 +78,72 @@ void Player::Tick(float deltaTime)
 		yDirection = 1.0f;
 	}
 
+
 	Move(xDirection, yDirection, deltaTime);
 
+
+
+
 }
 
-void Player::OnCollision(const std::shared_ptr<Craft::Actor>& other)
+// 충돌 이벤트
+void Player::OnCollision(const std::shared_ptr<Actor>& other)
 {
+	//  벽 충돌처리
+	if (other->IsTypeOf<Wall>())
+	{
+		SetPosition(GetPreviousPosition());
 
+		xPosition =
+			static_cast<float>(GetPreviousPosition().x);
+
+		yPosition =
+			static_cast<float>(GetPreviousPosition().y);
+	}
+
+	//  나무 충돌 처리
+	if (other->IsTypeOf<Tree>())
+	{
+		SetPosition(GetPreviousPosition());
+
+		xPosition =
+			static_cast<float>(GetPreviousPosition().x);
+
+		yPosition =
+			static_cast<float>(GetPreviousPosition().y);
+	}
+
+	//  밴치 충돌 처리
+	if (other->IsTypeOf<Bench>())
+	{
+		SetPosition(GetPreviousPosition());
+
+		xPosition =
+			static_cast<float>(GetPreviousPosition().x);
+
+		yPosition =
+			static_cast<float>(GetPreviousPosition().y);
+	}
+
+	// 쓰레기 줍는 과정 처리 근데 스페이스를 누르면 처리 되게 해야하는데
+	if (Input::Get().GetKey(VK_SPACE))
+	{
+		if (other->IsTypeOf<Garbage>())
+		{
+			// 잡고 있는 상태 변환
+			CanCarrying();
+
+			// 이미 잡고 있다면 안되게 처리
+			if (!isGrab)
+			{
+				return;
+			}
+
+			// 삭제 요철
+			other->Destroy();
+		}
+	}
 }
-
 void Player::Move(float xDirection, float yDirection, float deltaTime)
 {
 	xPosition += xDirection * xMoveSpeed * deltaTime;
@@ -107,7 +182,21 @@ void Player::Move(float xDirection, float yDirection, float deltaTime)
 
 }
 
+void Player::CanCarrying()
+{
+	isGrab = true;
+}
+
 void Player::PickUpGarbage()
 {
+	// Todo: 쓰레기를 스페이스로 줍는 과정
+	// 쓰레기 근처로 간다.
+	// 쓰레기가 근처에 있는 지 확인한다. CheckGarbage()
+	// 쓰레기를 스페이스바를 눌러 줍는다 VK_SPACE
+	// 쓰레기를 삭제한다. Destory()
+	// 쓰레기를 쓰레기통에 넣으면 카운트가 올라간다 ++ garbageCount
+
+
 
 }
+

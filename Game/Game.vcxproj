@@ -99,12 +99,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Bench.cpp" />
-    <ClCompile Include="Actor\Cat.cpp" />
-    <ClCompile Include="Actor\Dog.cpp" />
     <ClCompile Include="Actor\Garbage.cpp" />
     <ClCompile Include="Actor\Ground.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
-    <ClCompile Include="Actor\Rat.cpp" />
     <ClCompile Include="Actor\Tree.cpp" />
     <ClCompile Include="Actor\Wall.cpp" />
     <ClCompile Include="Actor\Water.cpp" />
@@ -115,12 +112,9 @@
   <ItemGroup>
     <ClInclude Include="Actor\Bench.h" />
     <ClInclude Include="Actor\Box.h" />
-    <ClInclude Include="Actor\Cat.h" />
-    <ClInclude Include="Actor\Dog.h" />
     <ClInclude Include="Actor\Garbage.h" />
     <ClInclude Include="Actor\Ground.h" />
     <ClInclude Include="Actor\Player.h" />
-    <ClInclude Include="Actor\Rat.h" />
     <ClInclude Include="Actor\Target.h" />
     <ClInclude Include="Actor\Tree.h" />
     <ClInclude Include="Actor\Wall.h" />

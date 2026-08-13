@@ -5,6 +5,7 @@
 #include <Actor/Ground.h>
 #include <Actor/Water.h>
 #include <Actor/Bench.h>
+#include <Actor/Garbage.h>
 
 #include <cassert>
 
@@ -25,6 +26,12 @@ void SmallParkLevel::OnInitialized()
 
     // 이 레벨에서 사용할 맵 불러오기
     LoadMap("SmallParkMap.txt");
+
+	// 플레이어 임시 스폰
+	SpawnActor<Player>(Vector2(10,5));
+
+	SpawnActor<Garbage>(Vector2(10, 10));
+	
 }
 
 void SmallParkLevel::LoadMap(const std::string& filename)
@@ -107,10 +114,6 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 			{
 			case '#':
 				SpawnActor<Wall>(position);
-				break;
-
-			case '@':
-				SpawnActor<Player>(position);
 				break;
 
 			case 'I':
