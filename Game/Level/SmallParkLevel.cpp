@@ -43,10 +43,20 @@ void SmallParkLevel::ShowLeafEffect()
 	}
 
 	// 상태값 변경
-	onLeafEffect = true;
+	StartLeafEffect();
 
 	// 효과 생성
 	SpawnActor<LeafEffect>();
+}
+
+void SmallParkLevel::StartLeafEffect()
+{
+	onLeafEffect = true;
+}
+
+void SmallParkLevel::EndLeafEffect()
+{
+	onLeafEffect = false;
 }
 
 void SmallParkLevel::LoadMap(const std::string& filename)

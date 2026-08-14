@@ -29,6 +29,6 @@ private:
 
 	// 가리는 시간
 	float elapsedTime = 0.0f;
-	float duration = 1.0f;
+	float duration = 5.0f;
 };
 

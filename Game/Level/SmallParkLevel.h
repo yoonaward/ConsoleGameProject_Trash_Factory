@@ -24,6 +24,8 @@ public:
 
 	// LeafEffect 생성 함수
 	void ShowLeafEffect();
+	void StartLeafEffect();
+	void EndLeafEffect();
 
 private:
 	// 맵 로드

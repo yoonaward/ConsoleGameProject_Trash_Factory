@@ -1,6 +1,7 @@
 ﻿#include "LeafEffect.h"
 
 #include <Render/Renderer.h>
+#include <Level/SmallParkLevel.h>
 
 #include <cassert>
 
@@ -9,7 +10,7 @@ using namespace Craft;
 LeafEffect::LeafEffect()
 	:Actor("", Vector2::Zero, Color::Green)
 {
-	sortingOrder = 100;
+	sortingOrder = 20;
 	LoadEffect("LeafEffect.txt");
 }
 
@@ -25,10 +26,23 @@ void LeafEffect::Tick(float deltaTime)
 
 	elapsedTime += deltaTime;
 
-	if (elapsedTime >= duration)
+	if (elapsedTime < duration)
 	{
-		Destroy();
+		return;
 	}
+
+	// 현재 효과 레벨 가져오기
+	auto parkLevel =
+		std::dynamic_pointer_cast<SmallParkLevel>(GetOwner());
+
+	// 효과 종료 알림
+	if (parkLevel)
+	{
+		parkLevel->EndLeafEffect();
+	}
+
+	// 액터 삭제 요청
+	Destroy();
 }
 
 void LeafEffect::Draw()
@@ -65,7 +79,7 @@ void LeafEffect::LoadEffect(const std::string& filename)
 
 	// 위치 처음으로 돌리기
 	rewind(file);
-
+	
 	// 사이즈 만큼 버퍼 생성.
 	char* buffer = new char[fileSize];
 
@@ -81,41 +95,41 @@ void LeafEffect::LoadEffect(const std::string& filename)
 	// 한 줄 저장용 
 	std::string currentLine;
 
-	while (true)
+	// 종료 조건
+	while (index < readSize)
 	{
-		// 종료 조건
-		if (index >= fileSize)
-		{
-			break;
-		}
-
+		
 		// 이번에 확인할 문자 값
 		char mapCharacter = buffer[index];
 
 		// 확인 후 증가
 		++index;
 
+
+
+
 		// 한 줄이 끝나면 저장.
 		if (mapCharacter == '\n')
 		{
-			std::vector<std::string> effectLines;
+			effectLines.emplace_back(currentLine);
 			currentLine.clear();
 			continue;
-		}
-
-		if (mapCharacter == '#')
-		{
-			currentLine.push_back('#');
 		}
 
 		if (mapCharacter == '.')
 		{
 			currentLine.push_back(' ');
 		}
+
 		else
 		{
 			currentLine.push_back(mapCharacter);
 		}
+
+	}
+	if (!currentLine.empty())
+	{
+		effectLines.emplace_back(currentLine);
 	}
 
 	// 동적 메모리 버퍼 해제
