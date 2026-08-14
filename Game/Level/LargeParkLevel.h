@@ -1,31 +1,27 @@
 ﻿#pragma once
 
 #include <Level/Level.h>
-#include <Level/LargeParkLevel.h>
-#include <string>
 
-/*
- 목표 갯수 필요
-*/
-
-
-class SmallParkLevel : public Craft::Level
+class LargeParkLevel : public Craft::Level
 {
 
-	TYPE_DECLARATIONS(SmallParkLevel, Level)
+	TYPE_DECLARATIONS(LargeParkLevel, Level)
 
-public:
-	SmallParkLevel();
-	virtual~SmallParkLevel();
 
 public:
 
-	// 맵 초기화 함수
+	LargeParkLevel();
+	virtual ~LargeParkLevel();
+
 	virtual void OnInitialized() override;
 
-	// LeafEffect 생성 함수
+	// Leaf Effect 호출
 	void ShowLeafEffect();
+
+	// onLeafEffect true
 	void StartLeafEffect();
+
+	// onLeafEffect false
 	void EndLeafEffect();
 
 	// TrashCan에 넣었을 때 호출
@@ -33,6 +29,9 @@ public:
 
 	// Door와 상호작용할 때 호출
 	void MoveNextStage();
+
+	// Stage 클리어 처리
+	void ClearStage();
 
 	// 클리어 여부 확인
 	bool IsStageClear() const;
@@ -42,7 +41,7 @@ private:
 	void LoadMap(const std::string& filename);
 
 	void CheckStageClear();
-	
+
 private:
 	// LeafEffect 중복을 막기 위한 상태
 	bool onLeafEffect = false;

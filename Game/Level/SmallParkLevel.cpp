@@ -1,4 +1,8 @@
 ﻿#include "SmallParkLevel.h"
+
+#include <Engine/Engine.h>
+#include <Level/LargeParkLevel.h>
+
 #include <Actor/Player.h>
 #include <Actor/Tree.h>
 #include <Actor/Ground.h>
@@ -7,6 +11,7 @@
 #include <Actor/TrashCan.h>
 #include <Actor/Obstacle.h>
 #include <Actor/LeafEffect.h>
+#include <Actor/Door.h>
 
 
 #include <cassert>
@@ -57,6 +62,33 @@ void SmallParkLevel::StartLeafEffect()
 void SmallParkLevel::EndLeafEffect()
 {
 	onLeafEffect = false;
+}
+
+void SmallParkLevel::AddCGarbage()
+{
+	++garbageCount;
+
+	if (garbageCount == goalGarbageCount)
+	{
+		isStageCleared = true;
+	}
+}
+
+void SmallParkLevel::MoveNextStage()
+{
+	// 클리어 조건을 만족하지 않았다면 이동 리턴
+	if (!isStageCleared)
+	{
+		return;
+	}
+
+	// 다음 레벨 생성
+	Engine::Get().AddNewLevel<LargeParkLevel>();
+}
+
+bool SmallParkLevel::IsStageClear() const
+{
+	return isStageCleared;
 }
 
 void SmallParkLevel::LoadMap(const std::string& filename)
@@ -165,6 +197,10 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 				SpawnActor<TrashCan>(position);
 				break;
 
+			case 'D':
+				SpawnActor<Door>(position);
+				break;
+
 
 			}
 
@@ -184,4 +220,14 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 		file = nullptr;
 	}
 
+	void SmallParkLevel::CheckStageClear()
+	{
+		if (garbageCount < goalGarbageCount)
+		{
+			return;
+		}
 
+		isStageCleared = true;
+	}
+
+	

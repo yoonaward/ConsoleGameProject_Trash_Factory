@@ -19,8 +19,3 @@ TrashCan::TrashCan(const Vector2& position)
 TrashCan::~TrashCan()
 {
 }
-
-void TrashCan::OnCollision(const std::shared_ptr<Craft::Actor>& other)
-{
-
-}

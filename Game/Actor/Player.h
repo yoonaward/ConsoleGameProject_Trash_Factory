@@ -28,9 +28,6 @@ public:
 	// 속도를 다시 되돌리는 
 	void revertMoveSpeed();
 
-
-
-
 private:
 	
 	// 이벤트 함수 오버라이드.
@@ -55,7 +52,6 @@ private:
 	
 private:
 	// 옮기는 거 false
-	bool isGrab = false;
-
+	bool onGrab = false;
 };
 

@@ -98,6 +98,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\Door.cpp" />
     <ClCompile Include="Actor\Garbage.cpp" />
     <ClCompile Include="Actor\Ground.cpp" />
     <ClCompile Include="Actor\LeafEffect.cpp" />
@@ -106,12 +107,14 @@
     <ClCompile Include="Actor\TrashCan.cpp" />
     <ClCompile Include="Actor\Tree.cpp" />
     <ClCompile Include="Actor\Water.cpp" />
+    <ClCompile Include="Level\LargeParkLevel.cpp" />
     <ClCompile Include="Level\SmallParkLevel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="System\GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Box.h" />
+    <ClInclude Include="Actor\Door.h" />
     <ClInclude Include="Actor\Garbage.h" />
     <ClInclude Include="Actor\Ground.h" />
     <ClInclude Include="Actor\LeafEffect.h" />
@@ -123,6 +126,7 @@
     <ClInclude Include="Actor\Water.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Level\GameLevel.h" />
+    <ClInclude Include="Level\LargeParkLevel.h" />
     <ClInclude Include="Level\MenuLevel.h" />
     <ClInclude Include="Level\SmallParkLevel.h" />
     <ClInclude Include="System\GameState.h" />

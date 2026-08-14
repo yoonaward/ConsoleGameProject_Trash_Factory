@@ -18,11 +18,7 @@ public:
 
 	virtual ~TrashCan();
 
-	virtual void OnCollision(const std::shared_ptr<Craft::Actor>& other) override;
-
-	void CheckGarbage();
 private:
-	int garbageCount = 0;
 
 };
 

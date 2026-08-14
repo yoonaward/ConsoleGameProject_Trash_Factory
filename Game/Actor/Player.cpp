@@ -8,6 +8,7 @@
 #include <Actor/Water.h>
 #include <Actor/LeafEffect.h>
 #include <Level/SmallParkLevel.h>
+#include <Actor/Door.h>
 
 
 using namespace Craft;
@@ -124,12 +125,16 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 	//  나무 충돌 처리
 	if (other->IsTypeOf<Tree>())
 	{
-		auto parkLevel =
-			std::dynamic_pointer_cast<SmallParkLevel>(GetOwner());
-
-		if (parkLevel)
+		auto sParkLevel = std::dynamic_pointer_cast<SmallParkLevel>(GetOwner());
+		auto lParkLevel = std::dynamic_pointer_cast<LargeParkLevel>(GetOwner());
+		if (sParkLevel)
 		{
-			parkLevel->ShowLeafEffect();
+			sParkLevel->ShowLeafEffect();
+		}
+
+		if (lParkLevel)
+		{
+			lParkLevel->ShowLeafEffect();
 		}
 
 		return;
@@ -155,13 +160,13 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 		if (other->IsTypeOf<Garbage>())
 		{
 			// 이미 잡고 있다면 안되게 처리
-			if (isGrab)
+			if (onGrab)
 			{
 				return;
 			}
 
 			// 잡고 있는 상태 변환
-			isGrab = true;
+			onGrab = true;
 
 			// 잡고 있는 이미지 추가
 			ChangeImage("&");
@@ -176,22 +181,49 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 		if (other->IsTypeOf<TrashCan>())
 		{
 			// 들고 있지 않으면 버리지 않음
-			if (!isGrab)
+			if (!onGrab)
 			{
 				return;
 			}
 
 			// 놓는 상태로 변환.
-			isGrab = false;
+			onGrab = false;
 
 			// 잡고 있는 이미지 변경
 			ChangeImage("@");
 
-
-			// Todo: 스코어 증가 처리.
+			// Garbage 값 ++
+			auto sParkLevel = std::dynamic_pointer_cast<SmallParkLevel>(GetOwner());
+			auto lParkLevel = std::dynamic_pointer_cast<LargeParkLevel>(GetOwner());
+			if (sParkLevel)
+			{
+				sParkLevel->AddCGarbage();
+			}
+			if (lParkLevel)
+			{
+				lParkLevel->AddCGarbage();
+			}
 
 			return;
 
+		}
+
+		// 다음 스테이지 입장 문
+		if (other->IsTypeOf<Door>())
+		{
+			auto sParkLevel = std::dynamic_pointer_cast<SmallParkLevel>(GetOwner());
+			auto lParkLevel = std::dynamic_pointer_cast<LargeParkLevel>(GetOwner());
+
+			if (sParkLevel)
+			{
+				sParkLevel->MoveNextStage();
+			}
+			if (lParkLevel)
+			{
+				lParkLevel->ClearStage();
+			}
+			
+			return;
 		}
 	}
 
