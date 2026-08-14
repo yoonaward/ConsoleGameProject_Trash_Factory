@@ -53,5 +53,8 @@ private:
 private:
 	// 옮기는 거 false
 	bool onGrab = false;
+	
+	// 물 상태 플래그
+	bool onWater = false;
 };
 

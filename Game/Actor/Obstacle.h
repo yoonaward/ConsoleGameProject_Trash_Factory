@@ -24,7 +24,6 @@ public:
 
 	virtual ~Obstacle();
 
-	// Getter
 	// 반환 자료형  함수이름       
 	ObstacleType GetObstacleType() const;
 

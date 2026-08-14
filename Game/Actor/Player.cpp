@@ -66,6 +66,21 @@ void Player::Tick(float deltaTime)
 {
 	// 상위 계층의 Tick 호출
 	super::Tick(deltaTime);
+	
+	// 물 충돌 검사
+	if (onWater)
+	{
+		ChangeMoveSpeed();
+	}
+
+	else
+	{
+		revertMoveSpeed();
+	}
+
+	// 프레임 충돌 검사를 위해 초기화
+	onWater = false;
+
 
 	// @temp 강제 종료.
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
@@ -125,6 +140,7 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 	//  나무 충돌 처리
 	if (other->IsTypeOf<Tree>())
 	{
+		// 다운캐스팅 확인하기
 		auto sParkLevel = std::dynamic_pointer_cast<SmallParkLevel>(GetOwner());
 		auto lParkLevel = std::dynamic_pointer_cast<LargeParkLevel>(GetOwner());
 		if (sParkLevel)
@@ -142,13 +158,8 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 		//  물 충돌 처리
 		if (other->IsTypeOf<Water>())
 		{
-			ChangeMoveSpeed();
-		}
-
-		//  물 나왔을 때 처리
-		if (!other->IsTypeOf<Water>())
-		{
-			revertMoveSpeed();
+			onWater = true;
+			
 		}
 
 		// 쓰레기 줍는 과정 처리 근데 스페이스를 누르면 처리 되게 해야하는데
