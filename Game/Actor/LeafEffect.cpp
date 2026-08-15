@@ -32,13 +32,23 @@ void LeafEffect::Tick(float deltaTime)
 	}
 
 	// 현재 효과 레벨 가져오기
-	auto parkLevel =
+	auto sParkLevel =
 		std::dynamic_pointer_cast<SmallParkLevel>(GetOwner());
 
-	// 효과 종료 알림
-	if (parkLevel)
+	// 현재 효과 레벨 가져오기
+	auto lParkLevel =
+		std::dynamic_pointer_cast<LargeParkLevel>(GetOwner());
+
+	// SmallPark 효과 종료 알림
+	if (sParkLevel)
 	{
-		parkLevel->EndLeafEffect();
+		sParkLevel->EndLeafEffect();
+	}
+
+	// LargePark 효과 종료 알림
+	if (lParkLevel)
+	{
+		lParkLevel->EndLeafEffect();
 	}
 
 	// 액터 삭제 요청

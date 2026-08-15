@@ -5,7 +5,6 @@
 
 #include <Actor/Player.h>
 #include <Actor/Tree.h>
-#include <Actor/Ground.h>
 #include <Actor/Water.h>
 #include <Actor/Garbage.h>
 #include <Actor/TrashCan.h>
@@ -175,10 +174,6 @@ void SmallParkLevel::LoadMap(const std::string& filename)
 
 			case 'I':
 				SpawnActor<Tree>(position);
-				break;
-
-			case '.':
-				SpawnActor<Ground>(position);
 				break;
 
 			case '~':
