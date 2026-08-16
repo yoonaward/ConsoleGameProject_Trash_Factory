@@ -107,6 +107,7 @@
     <ClCompile Include="Actor\Tree.cpp" />
     <ClCompile Include="Actor\Water.cpp" />
     <ClCompile Include="Level\LargeParkLevel.cpp" />
+    <ClCompile Include="Level\MenuLevel.cpp" />
     <ClCompile Include="Level\SmallParkLevel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="System\GameState.cpp" />
