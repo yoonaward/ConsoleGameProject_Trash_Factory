@@ -22,7 +22,7 @@ public:
 	// 생성자.
 	Player();
 
-	// 플레이어의 속도조절 Getter
+	// 플레이어의 속도조절
 	void ChangeMoveSpeed();
 
 	// 속도를 다시 되돌리는 
@@ -47,8 +47,8 @@ private:
 	
 
 	// 이동 속도 변수.
-	float xMoveSpeed = 10.0f;
-	float yMoveSpeed = 5.82f;
+	float xMoveSpeed = 50.0f;            //10.0f;
+	float yMoveSpeed = 50.0f;            //5.82f;
 	
 private:
 	// 옮기는 거 false

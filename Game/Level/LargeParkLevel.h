@@ -15,6 +15,8 @@ public:
 
 	virtual void OnInitialized() override;
 
+	virtual void Draw() override;
+
 	// Leaf Effect 호출
 	void ShowLeafEffect();
 
@@ -46,7 +48,7 @@ private:
 
 	// 스테이지 클리어 처리를 위한 garbage Count
 	int garbageCount = 0;
-	int goalGarbageCount = 1;
+	int goalGarbageCount = 5;
 
 	bool isStageCleared = false;
 };

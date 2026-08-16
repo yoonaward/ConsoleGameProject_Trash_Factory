@@ -34,8 +34,8 @@ Player::Player()
 	:Actor("@", Vector2::Zero, Color::Green)
 {
 	// 생성 위치 설정.
-	int x = Engine::Get().GetWidth() / 2 - (width / 2);
-	int y = Engine::Get().GetHeight() / 2;
+	int x = 91;
+	int y = 28;
 	SetPosition(Vector2(x, y));
 
 	// x 위치 저장.

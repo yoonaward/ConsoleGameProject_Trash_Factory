@@ -22,6 +22,9 @@ public:
 	// 맵 초기화 함수
 	virtual void OnInitialized() override;
 
+	// HUD 출력
+	virtual void Draw() override;
+
 	// LeafEffect 생성 함수
 	void ShowLeafEffect();
 	void StartLeafEffect();
@@ -48,7 +51,7 @@ private:
 
 	// 스테이지 클리어 처리를 위한 garbage Count
 	int garbageCount = 0;
-	int goalGarbageCount = 1;
+	int goalGarbageCount = 3;
 
 	bool isStageCleared = false;
 };

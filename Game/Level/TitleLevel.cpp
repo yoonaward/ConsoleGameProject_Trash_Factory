@@ -141,7 +141,7 @@ void TitleLevel::Draw()
 
     // 게임 제목.
     SubmitCentered(
-        "|           T R A S H   F A C T O R Y           |",
+        "|            T R A S H   F A C T O R Y            |",
         7,
         Color::Green
     );

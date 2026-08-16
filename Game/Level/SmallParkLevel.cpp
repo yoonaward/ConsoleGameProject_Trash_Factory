@@ -1,6 +1,7 @@
 ﻿#include "SmallParkLevel.h"
 
 #include <Engine/Engine.h>
+#include <Render/Renderer.h>
 
 #include <Actor/Player.h>
 #include <Actor/Tree.h>
@@ -12,7 +13,7 @@
 #include <Actor/Door.h>
 #include <Game/Game.h>
 
-
+#include <string>
 #include <cassert>
 
 using namespace Craft;
@@ -36,6 +37,27 @@ void SmallParkLevel::OnInitialized()
 	// 플레이어 임시 스폰
 	SpawnActor<Player>();
 	
+}
+
+void SmallParkLevel::Draw()
+{
+	// 액터 그리기
+	super::Draw();
+
+	// 쓰레기 처리 현황 HUD
+	const std::string hudText =
+		" TRASH GOAL : "
+		+ std::to_string(goalGarbageCount)
+		+ "    CLEANED : "
+		+ std::to_string(garbageCount)
+		+ " ";
+
+	// 맵 위쪽 테두리에 출력
+	Renderer::Get().Submit(
+		hudText,
+		Vector2(3, 0),
+		Color::Yellow
+	);
 }
 
 void SmallParkLevel::ShowLeafEffect()
