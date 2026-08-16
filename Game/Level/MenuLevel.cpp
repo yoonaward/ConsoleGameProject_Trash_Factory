@@ -13,7 +13,7 @@ MenuLevel::MenuLevel()
     // 게임 재개 메뉴.
     itemList.emplace_back(
         std::make_unique<MenuItem>(
-            "게임 계속하기",
+            "RESUME GMAE",
             []()
             {
                 Game::Get().ResumeGame();
@@ -24,7 +24,7 @@ MenuLevel::MenuLevel()
     // 게임 종료 메뉴.
     itemList.emplace_back(
         std::make_unique<MenuItem>(
-            "게임 나가기",
+            "QUIT GAME",
             []()
             {
                 Engine::Get().Quit();
@@ -100,22 +100,128 @@ void MenuLevel::Tick(float deltaTime)
 
 void MenuLevel::Draw()
 {
-    // 메뉴 제목.
-    Renderer::Get().Submit(
-        "Trash Factory",
-        Vector2::Zero
+    // 문자열을 화면 중앙에 출력하는 지역 함수.
+    auto SubmitCentered =
+        [](const std::string& text,
+            int y,
+            Color color,
+            int sortingOrder = 100)
+        {
+            const int screenWidth =
+                Engine::Get().GetWidth();
+
+            int x =
+                (screenWidth
+                    - static_cast<int>(text.length()))
+                / 2;
+
+            if (x < 0)
+            {
+                x = 0;
+            }
+
+            Renderer::Get().Submit(
+                text,
+                Vector2(x, y),
+                color,
+                sortingOrder
+            );
+        };
+
+    // 상단 장식.
+    SubmitCentered(
+        "+----------------------------------------------------+",
+        6,
+        Color::Brown
     );
 
+    SubmitCentered(
+        "|                                                    |",
+        7,
+        Color::Brown
+    );
+
+    SubmitCentered(
+        "|                   G A M E   P A U S E D                 |",
+        8,
+        Color::Yellow
+    );
+
+    SubmitCentered(
+        "|                                                    |",
+        9,
+        Color::Brown
+    );
+
+    SubmitCentered(
+        "+----------------------------------------------------+",
+        10,
+        Color::Brown
+    );
+
+    // 안내 문구.
+    SubmitCentered(
+        "원하는 메뉴를 선택해 주세요.",
+        13,
+        Color::Cyan
+    );
+
+    // 조작 안내.
+    SubmitCentered(
+        "UP / DOWN / RIGHT / LEFT : MOVE",
+        24,
+        Color::White
+    );
+
+    SubmitCentered(
+        "UP / DOWN : SELECT",
+        25,
+        Color::White
+    );
+
+    SubmitCentered(
+        "ENTER : CONFIRM",
+        26,
+        Color::White
+    );
+
+    // 메뉴 출력.
     const int menuCount =
         static_cast<int>(itemList.size());
+
+    const int menuStartY = 17;
 
     for (int index = 0;
         index < menuCount;
         ++index)
     {
-        // 현재 선택된 메뉴만 초록색으로 표시.
-        const Color textColor = index == currentIndex ? selectedColor : unselectedColor;
+        const bool isSelected =
+            index == currentIndex;
 
-        Renderer::Get().Submit(itemList[index]->text, Vector2(0, 2 + index), textColor);
+        std::string menuText;
+
+        if (isSelected)
+        {
+            menuText =
+                ">  [ "
+                + itemList[index]->text
+                + " ]  <";
+        }
+        else
+        {
+            menuText =
+                itemList[index]->text;
+        }
+
+        const Color textColor =
+            isSelected
+            ? Color::Green
+            : Color::BrightWhite;
+
+        SubmitCentered(
+            menuText,
+            menuStartY + index * 2,
+            textColor
+        );
     }
 }

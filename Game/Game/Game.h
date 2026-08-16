@@ -5,7 +5,8 @@
 
 // 현재 게임 화면 상태
 enum class GameState
-{
+{   
+    Title,
     Playing,
     Menu
 };
@@ -36,6 +37,9 @@ public:
     // 게임 스테이지 변경
     void ChangeStage(StageType newStage);
 
+    // 타이틀 메뉴
+    void StartNewGame();
+
 private:
     // StageType에 맞는 레벨 객체 생성
     std::shared_ptr<Craft::Level> CreateStage(
@@ -49,8 +53,11 @@ private:
     // 메뉴 레벨
     std::shared_ptr<Craft::Level> menuLevel;
 
-    // 현재 게임 화면 상태
-    GameState gameState = GameState::Playing;
+    // 타이틀 레벨
+    std::shared_ptr<Craft::Level> titleLevel;
+
+    // 초기 화면 상태
+    GameState gameState = GameState::Title;
 
     // 현재 플레이 중인 스테이지
     StageType currentStage = StageType::SmallPark;

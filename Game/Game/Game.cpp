@@ -3,23 +3,22 @@
 #include <Level/SmallParkLevel.h>
 #include <Level/LargeParkLevel.h>
 #include <Level/MenuLevel.h>
+#include <Level/TitleLevel.h>
 
 Game::Game()
 {
-    // 처음 플레이할 SmallParkLevel 생성.
-    gameplayLevel = CreateStage(
-        StageType::SmallPark
-    );
+    titleLevel =
+        std::make_shared<TitleLevel>();
 
-    // 메뉴 레벨은 한 번만 생성하고 계속 보관.
-    menuLevel = std::make_shared<MenuLevel>();
+    menuLevel =
+        std::make_shared<MenuLevel>();
 
-    // 시작 상태 설정.
-    currentStage = StageType::SmallPark;
-    gameState = GameState::Playing;
+    gameplayLevel = nullptr;
 
-    // 최초 실행 레벨 설정.
-    mainLevel = gameplayLevel;
+    gameState = GameState::Title;
+
+    // 최초 화면 타이틀 
+    mainLevel = titleLevel;
 }
 
 Game& Game::Get()
@@ -108,4 +107,11 @@ void Game::ChangeStage(StageType newStage)
 
     // 실제 mainLevel 교체는 프레임 마지막에 처리.
     nextLevel = gameplayLevel;
+}
+
+void Game::StartNewGame()
+{
+    ChangeStage(
+        StageType::SmallPark
+    );
 }
