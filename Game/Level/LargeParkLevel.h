@@ -40,8 +40,6 @@ private:
 	// 맵 로드
 	void LoadMap(const std::string& filename);
 
-	void CheckStageClear();
-
 private:
 	// LeafEffect 중복을 막기 위한 상태
 	bool onLeafEffect = false;

@@ -110,7 +110,7 @@
     <ClCompile Include="Level\MenuLevel.cpp" />
     <ClCompile Include="Level\SmallParkLevel.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="System\GameState.cpp" />
+    <ClCompile Include="Game\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Box.h" />
@@ -128,7 +128,6 @@
     <ClInclude Include="Level\LargeParkLevel.h" />
     <ClInclude Include="Level\MenuLevel.h" />
     <ClInclude Include="Level\SmallParkLevel.h" />
-    <ClInclude Include="System\GameState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

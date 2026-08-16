@@ -1,7 +1,6 @@
 ﻿#include "SmallParkLevel.h"
 
 #include <Engine/Engine.h>
-#include <Level/LargeParkLevel.h>
 
 #include <Actor/Player.h>
 #include <Actor/Tree.h>
@@ -11,6 +10,7 @@
 #include <Actor/Obstacle.h>
 #include <Actor/LeafEffect.h>
 #include <Actor/Door.h>
+#include <Game/Game.h>
 
 
 #include <cassert>
@@ -75,14 +75,17 @@ void SmallParkLevel::AddCGarbage()
 
 void SmallParkLevel::MoveNextStage()
 {
-	// 클리어 조건을 만족하지 않았다면 이동 리턴
+	// 클리어 조건을 만족하지 않았다면
+	// 다음 스테이지로 이동하지 않는다.
 	if (!isStageCleared)
 	{
 		return;
 	}
 
-	// 다음 레벨 생성
-	Engine::Get().AddNewLevel<LargeParkLevel>();
+	// 실제 LargePark 생성과 전환은 Game이 담당한다.
+	Game::Get().ChangeStage(
+		StageType::LargePark
+	);
 }
 
 bool SmallParkLevel::IsStageClear() const

@@ -1,9 +1,11 @@
-﻿#include <Engine/Engine.h>
-#include <Level/SmallParkLevel.h>
+﻿#include <Game/Game.h>
 int main()
 {
-	Craft::Engine engine;
-	engine.AddNewLevel<SmallParkLevel>();
-	engine.Run();
+	//Craft::Engine engine;
+	//engine.AddNewLevel<SmallParkLevel>();
+	//engine.Run();
+
+	Game game;
+	game.Run();
 
 }

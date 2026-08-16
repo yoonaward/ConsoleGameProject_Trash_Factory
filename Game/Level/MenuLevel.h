@@ -1,51 +1,53 @@
 #pragma once
 
 #include <Level/Level.h>
-#include <string>
+#include <Math/Color.h>
 
-// 메뉴 아이템 구조체
+#include <memory>
+#include <string>
+#include <vector>
+
+// 메뉴 하나의 정보를 저장하는 구조체
 struct MenuItem
 {
-	// 메뉴 선택 시 실행할 로직 저장을 위한 함수 포인터
-	using OnSelected = void(*)();
+    // 메뉴를 선택했을 때 호출할 함수 포인터 타입
+    using OnSelected = void(*)();
 
-	// 생성자
-	MenuItem(const std::string& text, OnSelected onSelected)
-		:text(text), onSelected(onSelected)
-	{
-	}
+    MenuItem(
+        const std::string& text,OnSelected onSelected): text(text), onSelected(onSelected)
+    {
+    }
 
-	//메뉴 텍스트
-	std::string text;
+    // 화면에 출력할 메뉴 이름
+    std::string text;
 
-	// 메뉴 선택 로직
-	OnSelected onSelected = nullptr;
+    // 선택됐을 때 호출할 함수
+    OnSelected onSelected = nullptr;
 };
 
 class MenuLevel : public Craft::Level
 {
 public:
-	MenuLevel();
-
-	
-private:
-	// 오버라이드 함수
-	virtual void Tick(float deltaTime) override;
-
-	virtual void Draw() override;
+    MenuLevel();
+    virtual ~MenuLevel() = default;
 
 private:
-	// 현재 활성화 된 메뉴 아이템
-	int currentIndex = 0;
+    // 메뉴 입력 처리
+    virtual void Tick(float deltaTime) override;
 
-	// 선택 메뉴 색상
-	Craft::Color selectedColor = Craft::Color::Green;
+    // 메뉴 출력
+    virtual void Draw() override;
 
-	// 미선택 메뉴 색상
-	Craft::Color unSelectedColor = Craft::Color::White;
+private:
+    // 현재 선택된 메뉴 인덱스
+    int currentIndex = 0;
 
-	// 메뉴 배열
-	std::vector<std::unique_ptr<MenuItem>> itemList;
+    // 선택된 메뉴 색상
+    Craft::Color selectedColor = Craft::Color::Green;
 
+    // 선택되지 않은 메뉴 색상
+    Craft::Color unselectedColor = Craft::Color::White;
+
+    // 메뉴 목록
+    std::vector<std::unique_ptr<MenuItem>> itemList;
 };
-

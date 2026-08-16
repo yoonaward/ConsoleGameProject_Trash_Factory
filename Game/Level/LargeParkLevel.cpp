@@ -210,8 +210,3 @@ void LargeParkLevel::LoadMap(const std::string& filename)
 	// 파일 초기화
 	file = nullptr;
 }
-
-
-void LargeParkLevel::CheckStageClear()
-{
-}

@@ -8,7 +8,9 @@
 #include <Actor/Water.h>
 #include <Actor/LeafEffect.h>
 #include <Level/SmallParkLevel.h>
+#include <Level/LargeParkLevel.h>
 #include <Actor/Door.h>
+#include <Game/Game.h>
 
 
 using namespace Craft;
@@ -82,14 +84,12 @@ void Player::Tick(float deltaTime)
 	onWater = false;
 
 
-	// @temp 강제 종료.
+	// ESC를 누르면 메뉴 열기.
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
-		QuitGame();
+		Game::Get().OpenMenu();
+		return;
 	}
-
-	// Todo: 메뉴 토글 기능
-
 
 	// 움직임 처리.
 	float xDirection = 0.0f;
